@@ -1,14 +1,23 @@
+<html>
+<head>
+<link rel="stylesheet" href="styles.css">
+  <title>OCP's</title>
+<div>
+<br>
+<a href="index.php">
+<img src="images/logo.png" height="75" style="float:right">
+</a>
+<h1>View All Courses/OCP's</h1>
+ <br>
+</div>
+</head>
+<body>
+<br>
+<br>
 <?php
-/* Attempt MySQL server connection. Assuming you are running MySQL
-server with default setting (user 'root' with no password) */
-$link = mysqli_connect("ocp-data.cggta8te9lhb.us-east-1.rds.amazonaws.com", "root", "AJM!adm1n", "OCPUbuntu");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
- 
-// attempt select query execution
+
+include ("conn.php");  //SQL connector
+//echo $link;
 
 $sql = "SELECT * FROM OCPs";
 
@@ -16,9 +25,9 @@ if($result = mysqli_query($link, $sql)){
     if(mysqli_num_rows($result) > 0){
         echo "<table>";
             echo "<tr>";
-                echo "<th>id</th>";
-                echo "<th>name</th>";
-                echo "<th>desc</th>";
+                echo "<th>ID</th>";
+                echo "<th>OCP</th>";
+                echo "<th>Course</th>";
                 echo "<th>Program</th>";
             echo "</tr>";
         while($row = mysqli_fetch_array($result)){
@@ -42,5 +51,6 @@ if($result = mysqli_query($link, $sql)){
 // Close connection
 $mysqli->close();
 
-
 ?>
+</body>
+</html>

@@ -1,23 +1,53 @@
-<?php
-/* Attempt MySQL server connection. Assuming you are running MySQL
-server with default setting (user 'root' with no password) */
-$link = mysqli_connect("ocp-data.cggta8te9lhb.us-east-1.rds.amazonaws.com", "root", "AJM!adm1n", "OCPUbuntu");
+<html>
+<head>
+<link rel="stylesheet" href="styles.css">
+  <title>Result</title>
+<div>
+<br>
+<a href="index.php">
+<img src="images/logo.png" height="75" style="float:right">
+</a>
+<h1>Continue</h1>
+ <br>
+</div>
+</head>
+<body>
+<br>
+<br>
+    <?php
+
+include ("conn.php");  //SQL connector
  
 // Check connection
 if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
  
-// get the post records
+// get the post records for 
 
-$txtTermID = $_POST['txtTermID'];
-$txtTermName = $_POST['txtTermName'];
+$txtdate = $_POST['txtdate'];
+$txtstuID = $_POST['txtstuID'];
+$txtstandardID = $_POST['txtstandardID'];
+$txtlevelID = $_POST['txtlevelID'];
+$txtObservation = $_POST['txtObservation'];
+$earnID = rand(1, 999999999);
+$txtassignmentID = rand(1, 9999999999);
 
  
-// attempt insert query execution
-$sql = "INSERT INTO terms (termID, termname) VALUES ('$txtTermID', '$txtTermName')";
+// insert assignment
+$sql = "INSERT INTO assignments (assignmentID, standardID, levelID, assignmentName) VALUES ('$txtassignmentID','$txtstandardID', '$txtlevelID', '$txtObservation')";
+if(mysqli_query($link, $sql)){
+//    echo "Records added successfully.";
+//    echo "<a href='fullprogresscheck.php?selected=$txtstuID'>  View student progress</a>";
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+}
+
+// insert earned OCP
+$sql = "INSERT INTO earnedOCP (earnID, date, stuID, assignmentID, Observation) VALUES ('$earnID','$txtdate', '$txtstuID','$txtassignmentID', '$txtObservation')";
 if(mysqli_query($link, $sql)){
     echo "Records added successfully.";
+    echo "<a href='fullprogresscheck.php?stuIDfromForm=$txtstuID'>  View student progress</a>";
 } else{
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 }
@@ -25,3 +55,5 @@ if(mysqli_query($link, $sql)){
 // close connection
 mysqli_close($link);
 ?>
+</body>
+</html>

@@ -1,12 +1,23 @@
+<html>
+<head>
+<link rel="stylesheet" href="styles.css">
+  <title>Students</title>
+<div>
+<br>
+<a href="index.php">
+<img src="images/logo.png" height="75" style="float:right">
+</a>
+<h1>Student List</h1>
+ <br>
+</div>
+</head>
+<body>
+<br>
+<br>
 <?php
-/* Attempt MySQL server connection. Assuming you are running MySQL
-server with default setting (user 'root' with no password) */
-$link = mysqli_connect("ocp-data.cggta8te9lhb.us-east-1.rds.amazonaws.com", "root", "AJM!adm1n", "OCPUbuntu");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
+
+include ("conn.php");  //SQL connector
+//echo $link;
  
 // attempt select query execution
 
@@ -45,3 +56,5 @@ $mysqli->close();
 
 
 ?>
+</body>
+</html>

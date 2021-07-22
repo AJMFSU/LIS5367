@@ -1,12 +1,23 @@
-<?php
-/* Attempt MySQL server connection. Assuming you are running MySQL
-server with default setting (user 'root' with no password) */
-$link = mysqli_connect("ocp-data.cggta8te9lhb.us-east-1.rds.amazonaws.com", "root", "AJM!adm1n", "OCPUbuntu");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
+<html>
+<head>
+<link rel="stylesheet" href="styles.css">
+  <title>Success</title>
+<div>
+<br>
+<a href="index.php">
+<img src="images/logo.png" height="75" style="float:right">
+</a>
+<h1>View All Terms</h1>
+ <br>
+</div>
+</head>
+<body>
+<br>
+<br>
+    <?php
+
+include ("conn.php");  //SQL connector
+//echo $link;
  
 // get the post records
 
@@ -17,7 +28,7 @@ $txtTermName = $_POST['txtTermName'];
 // attempt insert query execution
 $sql = "INSERT INTO terms (termID, termname) VALUES ('$txtTermID', '$txtTermName')";
 if(mysqli_query($link, $sql)){
-    echo "Records added successfully.";
+    echo "Record added successfully.";
 } else{
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 }
@@ -28,8 +39,8 @@ if($result = mysqli_query($link, $sql)){
     if(mysqli_num_rows($result) > 0){
         echo "<table>";
             echo "<tr>";
-                echo "<th>id</th>";
-                echo "<th>name</th>";
+                echo "<th>ID</th>";
+                echo "<th>Term</th>";
             echo "</tr>";
         while($row = mysqli_fetch_array($result)){
             echo "<tr>";
@@ -50,3 +61,5 @@ if($result = mysqli_query($link, $sql)){
 // close connection
 mysqli_close($link);
 ?>
+</body>
+</html>

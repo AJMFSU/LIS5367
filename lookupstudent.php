@@ -2,27 +2,37 @@
 <head>
 <link rel="stylesheet" href="styles.css">
   <title>Student Lookup</title>
+<div>
+<br>
+<a href="index.php">
+<img src="images/logo.png" height="75" style="float:right">
+</a>
+<h1>Lookup Student Information</h1>
+ <br>
+</div>
+
 
 </head>
 <body>
-Enter any of the following information to search students.
+<p></p>
+<h4>Enter any of the following information to search students.</h4>
 <form action="" method="post">
   <label for="stuid">Student ID:</label><br>
-<input type="text" name="$stuID" id="stuid"><br>
+<input type="text" name="$stuID",  id="stuid"><br>
   <label for="stufn">First Name:</label><br>
 <input type="text" name="$stuFName" id="stufn"><br>
 <label for="stuln">Last Name:</label><br>
 <input type="text" name="$stuLName" id="stuln"><br><br>
 
+
+
     <?php
-/* Attempt MySQL server connection. Assuming you are running MySQL
-server with default setting (user 'root' with no password) */
-$link = mysqli_connect("ocp-data.cggta8te9lhb.us-east-1.rds.amazonaws.com", "root", "AJM!adm1n", "OCPUbuntu");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
+
+//$stuIDs = filter_var($stuID, FILTER_SANITIZE_NUMBER_INT);
+
+include ("conn.php");  //SQL connector
+//echo $link;
+
 
       $records = mysqli_query($link, "SELECT * FROM students");  
         while($data = mysqli_fetch_array($records))
@@ -62,14 +72,14 @@ if($result = mysqli_query($link, $sql)){
                 echo "<th>Student ID</th>";
                 echo "<th>First Name</th>";
                 echo "<th>Last Name</th>";
-                echo "<th>Start Date</th>";
+//                echo "<th>Start Date</th>";
             echo "</tr>";
         while($row = mysqli_fetch_array($result)){
             echo "<tr>";
                 echo "<td>" . $row['stuID'] . "</td>";
                 echo "<td>" . $row['stuNameFirst'] . "</td>";
                 echo "<td>" . $row['stuNameLast'] . "</td>";  
-                echo "<td>" . $row['termID'] . "</td>";            
+ //               echo "<td>" . $row['termID'] . "</td>";            
      echo "</tr>";
         }
         echo "</table>";
